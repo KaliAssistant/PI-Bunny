@@ -29,14 +29,14 @@ This is a project that mimics the HAK5 Bash Bunny, using a Raspberry Pi Zero 2 W
 ### 0x02 Hardware.
 #### You need:
 - Raspberry pi zero 2w  [Amazon](https://www.amazon.com/Raspberry-Quad-core-Bluetooth-onboard-Antenna/dp/B0CCRP85TR)
-  - ![img](./docs/imgs/pi02w.jpg =200x200)
+  - ![img](./docs/imgs/pi02w.jpg=200x200)
 
 - USB to DIP 4x2.54 adapter [Amazon](https://www.amazon.com/MELIFE-Converter-2-54mm-Adapter-Breadboard/dp/B07W6T9KPJ)  
   - ![img](./docs/imgs/USB_A_to_DIP2.54.jpeg)
 - 2P DIP Switch [Amazon](https://www.amazon.com/Position-Toggle-Switch-2-54MM-Switches/dp/B09T5LQN5N)
   - ![img](./docs/imgs/2P_DIP_SW.jpeg)
 - Aluminum Alloy Protection case [Amazon](https://www.amazon.com/TUOPUONE-Aluminum-Protection-Compatibe-Raspberry/dp/B0CNZ9RJWM)
-  - ![img](./docs/imgs/Case.jpg =250x250)
+  - ![img](./docs/imgs/Case.jpg=250x250)
 - 3D Print Modules (in ./3dp/)
 
   
