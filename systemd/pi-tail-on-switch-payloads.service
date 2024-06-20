@@ -1,0 +1,10 @@
+[Unit]
+Description=Start Pi-Tail Exec Payloads On Switch
+After=pi-tail-switch.service
+
+[Service]
+Type=oneshot
+ExecStart=/home/kali/tools/gpio/exec/on_switch_oneshot.if
+
+[Install]
+WantedBy=multi-user.target

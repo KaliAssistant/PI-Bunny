@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+sleep 2
+if [ $(cat /home/kali/tools/gpio/status/SW_STATUS) = 1 ]; then
+  /root/payloads/switch1/*
+elif [ $(cat /home/kali/tools/gpio/status/SW_STATUS) = 2 ]; then
+  /root/payloads/switch2/*
+else
+  echo MASS_STORAGE > /home/kali/tools/gpio/status/LED_STATUS
+  ATTACKMODE STORAGE
+fi

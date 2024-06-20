@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+umount /root/storage/udisk.img
+
+mount /root/storage/udisk.img /root/udisk
+
+rsync -av /root/loot/ /root/udisk/loot/
+
+umount /root/storage/udisk.img

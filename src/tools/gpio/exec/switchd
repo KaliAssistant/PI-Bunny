@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+
+import RPi.GPIO as GPIO
+from time import sleep
+pwd = "/home/kali/tools/gpio/status/"
+pin1 = 19
+pin2 = 26
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(pin1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(pin2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+while True:
+    status = 0
+    if GPIO.input(pin1) == 0:
+        if GPIO.input(pin2) == 0:
+            status = 1
+        else:
+            status = 2
+    else:
+        status = 0
+    #print(status)
+    tmpfile = open(pwd+"SW_STATUS", "w")
+    tmpfile.write(str(status))
+    tmpfile.close()
+    sleep(0.5)

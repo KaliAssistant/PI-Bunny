@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+
+import os, sys
+from time import sleep
+import subprocess
+
+pyhid_head = '''
+from zero_hid import Keyboard, Mouse, KeyCodes
+import os, sys
+from time import sleep
+import math
+keyboard = Keyboard()
+mouse = Mouse()
+'''
+
+def main(filename, tmp_file):
+    with open(filename, 'rb') as file:
+        pyhid_main = file.read()
+
+    pyhid_all = pyhid_head + str(pyhid_main.decode('utf-8'))
+
+    with open(tmp_file, 'w') as tmp:
+        tmp.write(pyhid_all)
+
+    subprocess.run(f"/usr/bin/python3 {tmp_file}", shell=True)
+
+if __name__ == "__main__":
+    filename = sys.argv[1]
+    tmp_file = f'/tmp/pyQUACK.tmp'
+    main(filename, tmp_file)

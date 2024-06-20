@@ -1,0 +1,122 @@
+#!/usr/bin/python3
+
+import RPi.GPIO as GPIO
+from time import sleep
+import board
+import neopixel
+
+powerpin = 16
+GPIO.setwarnings(False)
+#GPIO.setmode(GPIO.BOARD)
+GPIO.setup(powerpin, GPIO.OUT)
+GPIO.output(powerpin, True)
+pixel = neopixel.NeoPixel(board.D21, 1, brightness=1)
+pixel.fill((0, 0, 0))
+
+
+pwd = "/home/kali/tools/gpio/status/"
+
+
+def led_off():
+    for t in range(20):
+        pixel.fill((0, 0, 0))
+        GPIO.output(powerpin, False)
+
+def led_finish():
+    for t in range(20):
+        for i in range(0, 256, 1):
+            pixel.fill((0, i, 0))
+            sleep(0.0005)
+        sleep(0.005)
+        for i in range(255, -1, -1):
+            pixel.fill((0, i, 0))
+            sleep(0.0005)
+        sleep(0.005)
+
+def led_attack():
+    for t in range(20):
+        pixel.fill((255, 0, 0))
+        sleep(0.05)
+        pixel.fill((0, 0, 0))
+        sleep(0.05)
+
+def led_error():
+    for t in range(20):
+        pixel.fill((255, 0, 0))
+
+def led_on_mass_storage_mode():
+    for t in range(2):
+        for i in range(0, 256, 1):
+            pixel.fill((0, 0, i))
+            sleep(0.001)
+        sleep(0.02)
+        for i in range(255, -1, -1):
+            pixel.fill((0, 0, i))
+            sleep(0.001)
+        sleep(0.02)
+
+
+def led_attack_nerver_stop():
+    for t in range(20):
+        for g in range(101):
+            pixel.fill((255, g, 0))
+            sleep(0.005)
+
+        for g in range(100, -1, -1):
+            pixel.fill((255, g, 0))
+            sleep(0.005)
+
+def rgb_gradient_1():
+        # Red to Green
+    for g in range(256):
+        #print((255, g, 0))  # Replace print with actual LED control command
+        pixel.fill((255, g, 0))
+        sleep(0.0001)  # Adjust the delay as needed
+
+        # Green to Blue
+    for r in range(255, -1, -1):
+        #print((r, 255, 255 - r))
+        pixel.fill((r, 255, 255 - r))
+        sleep(0.0001)
+
+    for b in range(255, -1, -1):
+        #print((0, b, 255))
+        pixel.fill((0, b, 255))
+        sleep(0.0001)
+
+    for b in range(256):
+        #print((b, 0, 255))
+        pixel.fill((b, 0, 255))
+        sleep(0.0001)
+
+    for b in range(255, -1, -1):
+        #print((255, 0, b))
+        pixel.fill((255, 0, b))
+        sleep(0.0001)
+
+while True:
+    GPIO.output(powerpin, True)
+    tmpfile = open(pwd+"LED_STATUS", "r")
+    led_status = tmpfile.readline()
+    ifstatus = led_status.split()
+    if len(ifstatus) < 1 :
+        ifstatus = led_status
+    else:
+        ifstatus = ifstatus[0]
+        #print(ifstatus)
+    tmpfile.close()
+    if ifstatus == "OFF" :
+        led_off()
+    if ifstatus == "FINISH" :
+        led_finish()
+    if ifstatus == "ATTACK" :
+        led_attack()
+    if ifstatus == "ATTACK_NV_STOP" :
+        led_attack_nerver_stop()
+    if ifstatus == "ERROR" :
+        led_error()
+    if ifstatus == "MASS_STORAGE" :
+        led_on_mass_storage_mode()
+    if ifstatus == "GAY" :
+        rgb_gradient_1()
+

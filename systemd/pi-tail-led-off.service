@@ -1,0 +1,10 @@
+[Unit]
+Description=Start Pi-Tail LED Off on PowerOn
+Before=pi-tail-led.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "echo OFF > /home/kali/tools/gpio/status/LED_STATUS"
+
+[Install]
+WantedBy=multi-user.target

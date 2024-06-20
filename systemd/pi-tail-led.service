@@ -1,0 +1,14 @@
+[Unit]
+Description=Start Pi-Tail GPIO LED Service
+
+
+[Service]
+Type=simple
+ExecStart=/home/kali/tools/gpio/exec/ledd
+WorkingDirectory=/home/kali/tools/gpio/status
+
+Restart=always
+RestartSec=3s
+
+[Install]
+WantedBy=multi-user.target

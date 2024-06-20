@@ -1,0 +1,10 @@
+[Unit]
+Description=Start Pi-Tail Sync Payload And Loot Service
+Before=pi-tail-on-switch-payloads.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/SYNC_UDISK
+
+[Install]
+WantedBy=multi-user.target

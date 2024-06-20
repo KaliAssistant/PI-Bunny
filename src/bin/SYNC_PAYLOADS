@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+umount /root/storage/udisk.img
+mount  /root/storage/udisk.img /root/udisk
+
+rsync -av --delete /root/udisk/payloads/ /root/payloads/
+
+umount /root/storage/udisk.img
