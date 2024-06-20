@@ -41,8 +41,103 @@ This is a project that mimics the [HAK5 Bash Bunny](https://docs.hak5.org/bash-b
 - 1x WS2812b 5050 SMD RGB LED 
   - <img src="./docs/imgs/ws2812b.jpeg" width="100">
 
+- San Disk Extreme A1 V30 (recommend)
+  - <img src="./docs/imgs/extreme-uhs-i-microsd-32gb.png" width="200">
+
 #### Assembly completed:
  <img src="./docs/imgs/IMG_4769.jpg" width="400">  <img src="./docs/imgs/IMG_4770.jpg" width="400">
  <img src="./docs/imgs/IMG_4771.jpg" width="400">
  <img src="./docs/imgs/pinout.jpg" width="500">
  <img src="./docs/imgs/USB_RPI.jpg" width="400">
+
+### 0x03 Build system images
+#### Build-Scripts
+ - Using [kali linux arm build scripts](https://gitlab.com/kalilinux/build-scripts/kali-arm)
+#### Building
+```bash
+cd ~/
+git clone https://gitlab.com/kalilinux/build-scripts/kali-arm
+cd ~/kali-arm/
+cp ./builder.txt.example ./builder.txt
+```
+Use your favorite text editor to edit `./builder.txt`
+
+```bash
+nvim ./builder.txt
+```
+
+```bash
+# Version Kali release
+#version=${version:-$(cat .release)}
+
+# Custom hostname variable
+#hostname=kali
+
+# Choose a locale
+#locale="en_US.UTF-8"
+
+# Free space added to the rootfs in MiB
+#free_space="300"
+
+# /boot partition in MiB
+#bootsize="128"
+
+# Select compression, xz or none
+#compress="xz"
+
+# Choose filesystem format to format (ext3 or ext4)
+#fstype="ext4"
+
+# Disable IPV6 (yes or no)
+#disable_ipv6="yes"
+
+# Make SWAP (yes or no)
+#swap="no"
+
+# DNS server
+#nameserver="8.8.8.8"
+
+# To limit the number of CPU cores to use during compression
+# Use 0 for unlimited CPU cores, -1 to subtract 1 cores from the total
+#cpu_cores="4"
+
+# To limit the CPU usage during compression
+# 0 or 100 No limit, 10 = percentage use, 50, 75, 90, etc.
+#cpu_limit="85"
+
+# If you have your own preferred mirrors, set them here.
+#mirror="http://http.kali.org/kali"
+#replace_mirror="http://http.kali.org/kali"
+
+# Use packages from the listed components of the archive.
+#components="main,contrib,non-free,non-free-firmware"
+
+# Suite to use, valid options are:
+# kali-rolling, kali-dev, kali-dev-only, kali-last-snapshot
+#suite="kali-rolling"
+#replace_suite="kali-rolling"
+
+# Default file name
+# On the RPi 3 script, this would result in
+# "kali-linux-202X-WXX-rpi4-nexmon-arm64" for the default filename.
+# For release builds from Kali, the requirements are that it start with kali-linuxi
+# and end with the architecture.
+#image_name="kali-linux-$(date +%Y)-W$(date +%U)-${hw_model}-${variant}"
+```
+Make sure you run the `./common.d/build_deps.sh` script before trying to build an image, as this installs all required dependencies.  You may need to reboot after installing the build dependencies, if you do, the script will mention it at the end.
+```bash
+sudo ./common.d/build_deps.sh
+```
+Now, just run the build build scripts. We don't use any desktop environment, so use option `--desktop=none`
+```bash 
+sudo ./raspberry-pi-zero-2-w-pitail.sh --desktop=none --arch=armhf
+```
+The reason I use `./raspberry-pi-zero-2-w-pitail.sh` is because it is easier to change the default configuration of Pi-tail.
+
+Depending on your system hardware & network connectivity, will depend on how long it will take to build (4 core CPU, 8GB RAM, SSD inside a VM takes using a local repo about 100 minutes per script)
+
+On x64 systems, after the script finishes running, you will have an image file located in `~/kali-arm/images/` called `kali-linux-202x.x-<rpi...>-armhf.img.xz`
+
+On x86 systems, as they do not have enough RAM to compress the image, after the script finishes running, you will have an image file located in `~/kali-arm/images/` called `kali-linux-202x.x-<rpi...>-armhf.img`
+#### Flash to SD card
+You can use Raspberry Pi imager or Balena Etcher.
