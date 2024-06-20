@@ -3,7 +3,7 @@
 ![img](./docs/imgs/pibunny.png)
 
 ### 0x00 About.
-This is a project that mimics the HAK5 Bash Bunny, using a Raspberry Pi Zero 2 W along with simple switches and RGB LEDs. With a homemade Pi Zero 2 W USB module and case, the cost is only about 1/10th of the Bash Bunny. Since it is based on the Raspberry Pi, I call this project "PI-Bunny".
+This is a project that mimics the [HAK5 Bash Bunny](https://docs.hak5.org/bash-bunny), using a Raspberry Pi Zero 2 W along with simple switches and RGB LEDs. With a homemade Pi Zero 2 W USB module and case, the cost is only about 1/10th of the Bash Bunny. Since it is based on the Raspberry Pi, I call this project "PI-Bunny".
 
 ### 0x01 Features.
 #### Plug & Play USB emulation 
@@ -38,5 +38,11 @@ This is a project that mimics the HAK5 Bash Bunny, using a Raspberry Pi Zero 2 W
 - Aluminum Alloy Protection case [Amazon](https://www.amazon.com/TUOPUONE-Aluminum-Protection-Compatibe-Raspberry/dp/B0CNZ9RJWM)
   - <img src="./docs/imgs/Case.jpg" width="250">
 - 3D Print Modules (in ./3dp/)
+- 1x WS2812b 5050 SMD RGB LED 
+  - <img src="./docs/imgs/ws2812b.jpeg" width="100">
 
-  
+#### Assembly completed:
+ <img src="./docs/imgs/IMG_4769.jpg" width="400">  <img src="./docs/imgs/IMG_4770.jpg" width="400">
+ <img src="./docs/imgs/IMG_4771.jpg" width="400">
+ <img src="./docs/imgs/pinout.jpg" width="500">
+ <img src="./docs/imgs/USB_RPI.jpg" width="400">
