@@ -1,10 +1,10 @@
 [Unit]
-Description=Start Pi-Tail Sync Payload And Loot Service
+Description=Start Pi-Tail Sync Payload And Loot And ATTACKFS Service
 Before=pi-tail-on-switch-payloads.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/SYNC_UDISK
+ExecStart=/usr/bin/bash -c "/usr/local/bin/SYNC_UDISK; /usr/local/bin/SYNC_ATTACKFS"
 
 [Install]
 WantedBy=multi-user.target

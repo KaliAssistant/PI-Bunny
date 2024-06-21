@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 
+# Author: KaliAssistant
+# Github: https://github.com/KaliAssistant
+
+
 set -e
 
 Color_Off='\033[0m'       # Text Reset

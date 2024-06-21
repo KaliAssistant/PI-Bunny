@@ -1,5 +1,6 @@
 #!/usr/bin/bash
-
+# Author: KaliAssistant
+# Github: https://github.com/KaliAssistant
 sleep 2
 if [ $(cat /home/kali/tools/gpio/status/SW_STATUS) = 1 ]; then
   /root/payloads/switch1/*

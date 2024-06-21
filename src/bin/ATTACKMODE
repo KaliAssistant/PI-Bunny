@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+# Author: KaliAssistant
+# Github: https://github.com/KaliAssistant
+
 if [ ! -d /sys/kernel/config/usb_gadget ]; then
         modprobe libcomposite
 fi

@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+umount /root/storage/attackfs.img
+mount  /root/storage/attackfs.img /root/attackfs
+
+umount /root/storage/udisk.img
+mount /root/storage/udisk.img /root/udisk
+
+rsync -av --delete /root/udisk/attackFS/ /root/attackfs/
+
+umount /root/storage/attackfs.img
+umount /root/storage/udisk.img
