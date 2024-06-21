@@ -70,6 +70,11 @@ install_files_root()
     mkfs.vfat /root/storage/attackfs.img -n "DATA"
     mkdir /root/storage/udisk.d
     mkdir /root/storage/attackfs.d
+    mount /root/storage/udisk.img /root/udisk
+    mkdir /root/udisk/loot
+    mkdir /root/udisk/payloads
+    mkdir /root/udisk/attackFS
+    umount -f /root/storage/udisk.img
   else
     echo -e "${Red}[E] ${Color_Off}File ${Cyan}/root/storage${Color_Off} exitst. Please remove it."
     exit 1
