@@ -141,3 +141,110 @@ On x64 systems, after the script finishes running, you will have an image file l
 On x86 systems, as they do not have enough RAM to compress the image, after the script finishes running, you will have an image file located in `~/kali-arm/images/` called `kali-linux-202x.x-<rpi...>-armhf.img`
 #### Flash to SD card
 You can use Raspberry Pi imager or Balena Etcher.
+
+ <img src="./docs/imgs/pi-imager.png" width="350"> <img src="./docs/imgs/balenaEtcher.png" width="400">
+
+#### Boot configuration
+copy `./config/*` to `boot`(your SD card) and use your favorite text editor to edit `interfaces` and `wpa_supplicant.conf`
+
+`interfaces`:
+```bash
+auto lo
+iface lo inet loopback
+
+auto pan0
+iface pan0 inet dhcp
+  bridge_stp off
+  bridge_ports none
+
+# WiFi AP = Disable ## Leave commented out, only define Enable OR Disable
+                    ## When enabled, comment out the wlan0 stanza
+allow-hotplug wlan0
+iface wlan0 inet manual
+  wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+  post-up iw wlan0 set power_save off
+
+iface home inet dhcp
+
+iface iphone inet dhcp
+
+
+
+# Android defaults
+allow-hotplug usb0
+iface usb0 inet static
+    address 192.168.0.1
+    netmask 255.255.255.0
+    gateway 192.168.0.1
+
+# PC
+allow-hotplug usb9
+iface usb9 inet static
+    address 192.168.44.254
+    netmask 255.255.255.0
+##    gateway 192.168.44.1
+
+allow-hotplug eth0
+iface eth0 inet dhcp
+```
+>note: interface `usb0` is for USB RNDIS or ECM Enternet attack
+
+`wpa_supplicant.conf`:
+```bash
+# reading passphrase from stdin
+network={
+	ssid="Your_AP"
+	psk="p@ssw0rd123"
+        id_str="home"
+        priority=1
+}
+
+network={
+	ssid="Your_Phone"
+	psk="p@ssw0rdxxx"
+	id_str="iphone"
+	priority=2
+}
+```
+
+### 0x04 Install
+#### First boot
+Boot your device and it should automatically connect to your wifi.
+
+ssh to your pi, you can use `arp-scan -I <interface> --localnet` to find IP address. username and password is `kali/kali`.
+
+`ssh kali@192.168.0.4`
+
+- 1 .  Change your root password: 
+
+  - <img src="./docs/imgs/rootpasswd.png" width="500">
+
+- 2 .  Edit `/etc/ssh/sshd_config` to allow root login
+
+  - `PermitRootLogin yes`
+
+- 3 . Download the repository:
+
+    ```bash
+    cd ~ 
+    git clone https://github.com/KaliAssistant/PI-Bunny.git
+    cd PI-Bunny
+    ```
+- 4 . Run install script:
+ 
+    ```bash
+    cd install
+    chmod +x install.sh
+    sudo ./install.sh
+    ```
+
+- 5 . reboot.
+
+    `reboot`
+
+### 0x05 Payloads
+Example payloads in `./payloads`
+
+### 0xFF
+Enjoy it !
+
