@@ -143,7 +143,7 @@ then
 	mkdir -p configs/c.$C/strings/0x409
 
 	mkdir -p ${FLASHDRIVE_PD_FILE/img/d}
-	mount -o loop,ro -t vfat $FLASHDRIVE_PD_FILE ${FLASHDRIVE_PD_FILE/img/d}
+	mount -o sync,ro -t vfat $FLASHDRIVE_PD_FILE ${FLASHDRIVE_PD_FILE/img/d} # no sync when usb unpluged , files will broken
 	mkdir -p functions/mass_storage.$N
 	echo 1 > functions/mass_storage.$N/stall
 	echo 0 > functions/mass_storage.$N/lun.0/cdrom
